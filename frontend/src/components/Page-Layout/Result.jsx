@@ -12,7 +12,7 @@ export default function Result({ config, data }) {
             <Grid.Column width={8} floated="left">
               <Card.Header>{title}</Card.Header>
               {subtitle && <Card.Header>{subtitle}</Card.Header>}
-              Written By: {authors[0]}
+              {authors && `Written By: ${authors[0]}`}
             </Grid.Column>
             <Grid.Column width={3} floated="right">
               <Button

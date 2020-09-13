@@ -3,6 +3,7 @@ import { Container } from "semantic-ui-react";
 import BookSearch from "../Page-Layout/Book-Search";
 import ResultList from "../Page-Layout/Result-List";
 import Result from "../Page-Layout/Result";
+import axios from "axios";
 
 export default function Search() {
   const [query, setQuery] = useState('')
@@ -13,6 +14,10 @@ export default function Search() {
     setQuery(value);
   }
 
+  const saveResult = result => axios.post('/api/result', {result})
+    .then(() => alert('result saved!'))
+    .catch(console.error)
+
   const handleSubmit = event => {
     event.preventDefault();
     console.log('Submitting ',query)
@@ -21,7 +26,7 @@ export default function Search() {
       .then(res => {
         console.log(res)
         setResults(
-          res.map((result, i) => <Result key={i} config={{label: 'Save', action: () => alert('Save')}} data={result}/>)
+          res.map((result, i) => <Result key={i} config={{label: 'Save', action: () => saveResult(result)}} data={result}/>)
         )
       })
   }
